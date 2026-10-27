@@ -77,14 +77,14 @@ function Dashboard() {
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <Select value={String(filters.season)} onValueChange={(v) => setFilters((f) => ({ ...f, season: v === "all" ? "all" : Number(v) }))}>
-            <SelectTrigger className="w-36" aria-label="Season"><SelectValue /></SelectTrigger>
+            <SelectTrigger className="w-[calc(50%-1.5rem)] sm:w-36" aria-label="Season"><SelectValue /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All seasons</SelectItem>
               {SEASONS.map((s) => <SelectItem key={s} value={String(s)}>{s} season</SelectItem>)}
             </SelectContent>
           </Select>
-          <Select value={filters.team} onValueChange={(v) => setFilters((f) => ({ ...f, team: v as Filters["team"] }))}>
-            <SelectTrigger className="w-44" aria-label="Team"><SelectValue /></SelectTrigger>
+          <Select value={filters.team} onValueChange={(v) => { setFilters((f) => ({ ...f, team: v as Filters["team"] })); if (v !== "all" && v !== "rbr" && v !== "mer") setMidTeam(v as TeamId); }}>
+            <SelectTrigger className="w-[calc(50%-1.5rem)] sm:w-44" aria-label="Team"><SelectValue /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All teams</SelectItem>
               {TEAMS.map((t) => <SelectItem key={t.id} value={t.id}>{t.name}</SelectItem>)}
@@ -99,7 +99,7 @@ function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-5 [&>*:last-child]:col-span-2 lg:[&>*:last-child]:col-span-1">
         <Kpi icon={Flag} label="Races" value={k.races} hint={`${k.entries} driver entries`} />
         <Kpi icon={Gauge} label="Points scored" value={k.points.toLocaleString()} hint="Top-10 scoring" />
         <Kpi icon={Medal} label="Podiums" value={k.podiums} hint="P1–P3 finishes" />
@@ -116,7 +116,7 @@ function Dashboard() {
                 <XAxis type="number" {...axis} />
                 <YAxis type="category" dataKey="driver" width={110} {...axis} tickFormatter={(d: string) => d.split(" ").slice(-1)[0] ?? d} />
                 <Tooltip {...tip} formatter={(v: number) => [`${v} pts`, "Points"]} />
-                <Bar dataKey="points" radius={[0, 4, 4, 0]}>
+                <Bar dataKey="points" radius={[0, 4, 4, 0]} maxBarSize={28}>
                   {standings.slice(0, 10).map((s) => <Cell key={s.driver} fill={teamColor(s.teamId)} />)}
                 </Bar>
               </BarChart>
@@ -139,7 +139,7 @@ function Dashboard() {
             <ResponsiveContainer width="100%" height={340}>
               <LineChart data={traj} margin={{ right: 12 }}>
                 <CartesianGrid stroke="var(--border)" strokeDasharray="3 3" />
-                <XAxis dataKey="race" {...axis} interval={2} />
+                <XAxis dataKey="race" {...axis} interval="preserveStartEnd" minTickGap={24} />
                 <YAxis {...axis} width={40} />
                 <Tooltip {...tip} cursor={{ stroke: "var(--primary)" }} />
                 <Legend wrapperStyle={{ fontSize: 12 }} />
@@ -236,7 +236,7 @@ function Dashboard() {
               <YAxis type="category" dataKey="team" width={90} {...axis} tickFormatter={(t: string) => t.replace(" Racing", "")} />
               <Tooltip {...tip} />
               <Legend wrapperStyle={{ fontSize: 12 }} />
-              <Bar dataKey="P1" stackId="p" fill="var(--chart-3)" />
+              <Bar dataKey="P1" stackId="p" maxBarSize={28} fill="var(--chart-3)" />
               <Bar dataKey="P2" stackId="p" fill="var(--tyre-hard)" />
               <Bar dataKey="P3" stackId="p" fill="var(--team-mcl)" radius={[0, 3, 3, 0]} />
             </BarChart>
