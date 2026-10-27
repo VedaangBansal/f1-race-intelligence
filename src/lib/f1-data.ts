@@ -69,7 +69,7 @@ function seasonBias(teamId: TeamId, season: number) {
     rbr: [0.95, 1.05, 1.15, 0.92], mer: [1.15, 0.85, 0.85, 0.9], fer: [0.75, 0.95, 0.85, 0.95],
     mcl: [0.75, 0.65, 0.9, 1.15], amr: [0.6, 0.6, 1.0, 0.75], alp: [0.95, 1.0, 0.9, 0.85],
   };
-  return m[teamId][SEASONS.indexOf(season as Season)];
+  return m[teamId]?.[SEASONS.indexOf(season as Season)] ?? 1;
 }
 
 function build(): ResultRow[] {
@@ -101,8 +101,8 @@ function build(): ResultRow[] {
         const startCompound = race.type === "Street" && c2 < 0.12 ? "Intermediate" : c2 < 0.45 ? "Medium" : c2 < 0.8 ? "Soft" : "Hard";
         rows.push({
           season, round: i + 1, race: race.name, country: race.country, circuitType: race.type,
-          driver: e.d, team: e.t.name, teamId: e.t.id, nationality: NATIONALITY[e.d], grid,
-          position, points: position && position <= 10 ? POINTS[position - 1] : 0, status, startCompound,
+          driver: e.d, team: e.t.name, teamId: e.t.id, nationality: NATIONALITY[e.d] ?? "Unknown", grid,
+          position, points: position && position <= 10 ? (POINTS[position - 1] ?? 0) : 0, status, startCompound,
         });
       });
     });
@@ -191,10 +191,10 @@ export function dnfByDriver(rows: ResultRow[]) {
   const m = new Map<string, Record<string, number | string>>();
   rows.filter((r) => r.status !== "Finished").forEach((r) => {
     const e = m.get(r.driver) ?? { driver: r.driver.split(" ").pop() ?? r.driver, total: 0, ...Object.fromEntries(DNF_CATEGORIES.map((c) => [c, 0])) };
-    (e[r.status] as number) += 1; (e.total as number) += 1;
+    e[r.status] = ((e[r.status] as number) ?? 0) + 1; e["total"] = (e["total"] as number) + 1;
     m.set(r.driver, e);
   });
-  return [...m.values()].sort((a, b) => (b.total as number) - (a.total as number));
+  return [...m.values()].sort((a, b) => (b["total"] as number) - (a["total"] as number));
 }
 
 // Illustrative all-time Grand Prix hosting counts (demo values).
