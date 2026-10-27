@@ -1,26 +1,59 @@
-# F1 Race Intelligence
+# 🏎️ F1 Race Intelligence
 
-Build a polished, responsive portfolio-ready web dashboard named “F1 Race Intelligence” for a vibe-coding project submission on SkillWallet. Use React + TypeScript + Tailwind/shadcn and interactive charts. Visual direction: premium Formula 1 telemetry aesthetic, near-black/navy background, racing red accents, crisp typography, responsive layout. Create a functional demo using clearly labelled illustrative/sample data (do not claim it is the actual 6,464-record dataset unless that dataset is provided). Dashboard sections: overview KPI cards; driver cumulative points leaderboard; constructors championship trajectory chart comparing Red Bull Racing, Mercedes, and a mid-tier team; tyre compound strategy comparison (Soft, Medium, Hard, Intermediate) by circuit type and race outcome; driver reliability/DNF analysis stacked bar grouped by failure category (engine, brakes, collision, mechanical, other); countries hosting most Grand Prix; driver nationality/talent-pool distribution; podiums by driver and team; season and team filters; interactive tooltips, searchable table, and a Story/Insights tab with three stakeholder scenarios: team strategist Rajan, broadcast analyst Divya, technical regulation analyst Arvind. Add a clear sample-data disclaimer, methodology, and README-style About page. Make the UI usable and visually impressive, charts interactive, mobile responsive, no dead buttons. Include downloadable CSV of displayed sample data if feasible. Use realistic but explicitly demo-only sample values. Project title and copy should be professional and suitable for a student portfolio.
+An interactive Formula 1 analytics dashboard built through **vibe coding**, exploring driver performance, constructors' championship trends, tyre strategies, race reliability, and global podium achievements.
 
-This project was built with [Lovable](https://lovable.dev).
+## Overview
 
-**Live app**: https://f1-race-intelligence.lovable.app
+F1 Race Intelligence transforms motorsport data into interactive visual insights for fans, analysts, strategists, and technical researchers.
 
-## Build with Lovable
+### Key Features
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/d7a29d16-1a10-4c8a-8504-d47463364557).
+- Driver performance leaderboard
+- Constructors' championship trajectory comparisons
+- Tyre compound strategy analysis
+- Driver reliability and DNF analysis
+- Grand Prix host-country distribution
+- Driver nationality and podium analysis
+- Interactive season and team filters
+- Stakeholder-focused insights and analysis
+- Responsive dashboard interface
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+## Technology Stack
 
-## Development
+- React
+- TypeScript
+- Tailwind CSS
+- Interactive data visualizations
+- Lovable AI-assisted development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Project Scenarios
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+1. **Team Performance Strategy:** Compare constructors and explore performance trends.
+2. **Motorsport Broadcasting:** Explore driver rankings, podiums, and Grand Prix statistics.
+3. **Technical Reliability Analysis:** Investigate DNF patterns and potential reliability concerns.
+
+## Demo
+
+Add your published application URL here once deployment is confirmed.
+
+## Data Disclaimer
+
+The current dashboard uses illustrative sample data for demonstration purposes. It does not represent verified official Formula 1 statistics or the original 6,464-record dataset. Historical analysis requires a validated source dataset.
+
+## Development Approach
+
+This project demonstrates vibe coding: using natural-language instructions and AI-assisted development to design, build, refine, and test an interactive analytics application.
+
+## Future Improvements
+
+- Integrate a verified historical Formula 1 dataset.
+- Add year-by-year driver and constructor comparisons.
+- Improve tyre strategy analysis using actual stint and pit-stop data.
+- Add downloadable reports and data exports.
+- Validate all calculated statistics against source records.
+
+## Author
+
+Vedaang Bansal
+
+Built as a data visualization and vibe-coding portfolio project.
