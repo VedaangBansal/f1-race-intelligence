@@ -104,7 +104,7 @@ function Dashboard() {
         <Kpi icon={Gauge} label="Points scored" value={k.points.toLocaleString()} hint="Top-10 scoring" />
         <Kpi icon={Medal} label="Podiums" value={k.podiums} hint="P1–P3 finishes" />
         <Kpi icon={Wrench} label="DNF rate" value={`${k.dnfRate.toFixed(1)}%`} hint="Retirements / entries" />
-        <Kpi icon={Trophy} label="Most wins" value={k.topWinner?.name.split(" ").slice(-1)[0] ?? "—"} hint={k.topWinner ? `${k.topWinner.wins} victories` : "No wins in filter"} accent />
+        <Kpi icon={Trophy} label="Most wins" value={k.topWinner ? (k.topWinner.name.split(" ").pop() ?? "") : "—"} hint={k.topWinner ? `${k.topWinner.wins} victories` : "No wins in filter"} accent />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-5">
@@ -114,7 +114,7 @@ function Dashboard() {
               <BarChart data={standings.slice(0, 10)} layout="vertical" margin={{ left: 10, right: 16 }}>
                 <CartesianGrid horizontal={false} stroke="var(--border)" strokeDasharray="3 3" />
                 <XAxis type="number" {...axis} />
-                <YAxis type="category" dataKey="driver" width={110} {...axis} tickFormatter={(d: string) => d.split(" ").slice(-1)[0]} />
+                <YAxis type="category" dataKey="driver" width={110} {...axis} tickFormatter={(d: string) => d.split(" ").slice(-1)[0] ?? d} />
                 <Tooltip {...tip} formatter={(v: number) => [`${v} pts`, "Points"]} />
                 <Bar dataKey="points" radius={[0, 4, 4, 0]}>
                   {standings.slice(0, 10).map((s) => <Cell key={s.driver} fill={teamColor(s.teamId)} />)}

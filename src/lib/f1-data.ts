@@ -190,7 +190,7 @@ export function tyreUsage(rows: ResultRow[]) {
 export function dnfByDriver(rows: ResultRow[]) {
   const m = new Map<string, Record<string, number | string>>();
   rows.filter((r) => r.status !== "Finished").forEach((r) => {
-    const e = m.get(r.driver) ?? { driver: r.driver.split(" ").slice(-1)[0], total: 0, ...Object.fromEntries(DNF_CATEGORIES.map((c) => [c, 0])) };
+    const e = m.get(r.driver) ?? { driver: r.driver.split(" ").pop() ?? r.driver, total: 0, ...Object.fromEntries(DNF_CATEGORIES.map((c) => [c, 0])) };
     (e[r.status] as number) += 1; (e.total as number) += 1;
     m.set(r.driver, e);
   });
